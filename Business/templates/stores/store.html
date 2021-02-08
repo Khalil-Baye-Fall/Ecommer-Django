@@ -1,0 +1,87 @@
+{% extends 'stores/base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+{% block title %} {{block.super}} - Store {% endblock title %}
+
+{% block content %}
+    <h2 class="head" >Our Products..</h2>
+    <span id="separate"></span>
+    <div class="row">
+        {% for product in products %}
+            {% if product.name == 't-shirt'  %}
+                <div class="col-lg-3 one">
+                    <img class="thumbnail" src="{{ product.imageURL }}" alt="No images">
+                    <div class="box-element product">
+                        <a class="btn btn-outline-success" href="{% url 'cart' %}" style="display:block-inline; float: right;">View</a>
+                        <h6> <strong>{{ product.name }}</strong></h6>
+                        <br>
+                        <hr>
+
+                        <button class="btn btn-outline-warning add-btn update-cart" data-product="{{product.id}}" data-action="add">Add to Cart</button>
+
+                        <h5 style="display: block-inline; float:right;">${{ product.price }}</h5>
+                    </div>
+                </div>
+            {% endif %}
+
+
+        {% endfor %}
+
+    </div>
+<hr>
+
+<h2 class="head" >Digital Products..</h2>
+<br>
+<div class="row">
+    {% for product in products %}
+        {% if product.digital == True %}
+            <div class="col-lg-3 one">
+                <img class="thumbnail" src="{{ product.imageURL }}" alt="No images">
+                <div class="box-element product">
+                    <a class="btn btn-outline-success" href="{% url 'cart' %}" style="display:block-inline; float: right;">View</a>
+                    <h6> <strong>{{ product.name }}</strong></h6>
+                    <br>
+                    <hr>
+
+                    <button class="btn btn-outline-warning add-btn update-cart" data-product="{{product.id}}" data-action="add">Add to Cart</button>
+
+                    <h5 style="display: block-inline; float:right;font-weight:bold;">${{ product.price }}</h5>
+                </div>
+            </div>
+        {% endif %}
+
+
+
+    {% endfor %}
+
+    </div>
+
+<hr>
+
+<h2 class="head" >Others Products..</h2>
+<br>
+<div class="row">
+    {% for product in products %}
+        {% if product.digital != True and product.name != 't-shirt' %}
+            <div class="col-lg-3 one">
+                <img class="thumbnail" src="{{ product.imageURL }}" alt="No images">
+                <div class="box-element product">
+                    <a class="btn btn-outline-success" href="{% url 'cart' %}" style="display:block-inline; float: right;">View</a>
+                    <h6> <strong>{{ product.name }}</strong></h6>
+                    <br>
+                    <hr>
+
+
+                    <button class="btn btn-outline-warning add-btn update-cart" data-product="{{product.id}}" data-action="add">Add to Cart</button>
+
+                    <h5 style="display: block-inline; float:right;font-weight:bold;">${{ product.price|floatformat:2 }}</h5>
+                </div>
+            </div>
+        {% endif %}
+
+
+    {% endfor %}
+
+    </div>
+{% endblock content %}

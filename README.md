@@ -1,1 +1,0 @@
-# Ecommer-Django
